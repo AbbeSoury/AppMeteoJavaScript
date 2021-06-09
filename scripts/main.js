@@ -1,7 +1,7 @@
 import tabJoursEnOrdre from "./Utilitaire/gestionTemps.js";
 
 const CLEFAPI = '59e69651fc51857ecad3510909796350';
-const CLEFAPIGEOLOC = 'c80b945a7d0eb5eae7fc665313c53246';
+const CLEFAPIGEOLOC = 'c5a04d9ddc0eea89512606535e55ea9a';
 
 let resultatsAPI;
 let resultatsAPIPos;
@@ -37,16 +37,16 @@ if(name != null ) {
 
 function GetCityPos(name){
 
-    fetch(`https://api.positionstack.com/v1/forward?access_key=${CLEFAPIGEOLOC}&query=${name}`)
+    fetch(`https://us1.locationiq.com/v1/search.php?key=pk.${CLEFAPIGEOLOC}&q=${name}&accept-language=fr&countrycodes=fr&format=json`)
     .then((reponse) => {
         return reponse.json();
     })
     .then((data2) => {
-        //console.log(data2);
+        console.log(data2);
         resultatsAPIPos = data2 ;
 
-        let long = resultatsAPIPos.data[0].longitude
-        let lat = resultatsAPIPos.data[0].latitude
+        let long = resultatsAPIPos[0].lon
+        let lat = resultatsAPIPos[0].lat
 
         AppelAPI(long,lat)
 })
@@ -65,7 +65,7 @@ function AppelAPI(long,lat){
 
         temps.innerText = resultatsAPI.current.weather[0].description;
         temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}°`;
-        localisation.innerText = resultatsAPIPos.data[0].label;
+        localisation.innerText = resultatsAPIPos[0].display_name;
 
 
         // les heures, par tranche de trois, avec leur température.
