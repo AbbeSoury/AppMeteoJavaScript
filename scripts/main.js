@@ -59,13 +59,13 @@ function AppelAPI(long,lat){
         return reponse.json();
     })
     .then((data) => {
-        //console.log(data);
+        console.log(data);
 
         resultatsAPI=data;
 
         temps.innerText = resultatsAPI.current.weather[0].description;
         temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}°`;
-        localisation.innerText = resultatsAPIPos[0].display_name;
+        localisation.innerText = resultatsAPIPos[0].display_name.split(',')[0];
 
 
         // les heures, par tranche de trois, avec leur température.
