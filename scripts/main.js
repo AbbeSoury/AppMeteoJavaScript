@@ -37,7 +37,7 @@ if(name != null ) {
 
 function GetCityPos(name){
 
-    fetch(`api.positionstack.com/v1/forward?access_key=${CLEFAPIGEOLOC}&query=${name}`)
+    fetch(`https://api.positionstack.com/v1/forward?access_key=${CLEFAPIGEOLOC}&query=${name}`)
     .then((reponse) => {
         return reponse.json();
     })
